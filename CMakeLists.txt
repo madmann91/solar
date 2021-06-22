@@ -11,7 +11,6 @@ ExternalProject_Add(proto
     CMAKE_ARGS -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
 ExternalProject_Get_Property(proto BINARY_DIR)
 set(proto_BINARY_DIR ${BINARY_DIR})
-ExternalProject_Add_StepDependencies(bvh configure proto)
 
 ExternalProject_Add(bvh
     GIT_REPOSITORY git@github.com:madmann91/bvh
