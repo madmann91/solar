@@ -16,6 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Install GCC 10
+      if: startsWith(matrix.os, 'ubuntu')
+      run: sudo apt-get install -y gcc-10 g++-10
+
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2
       with:
@@ -29,6 +33,9 @@ jobs:
       working-directory: ${{runner.workspace}}/build
       shell: bash # Necessary because of the $GITHUB_WORKSPACE variable
       run: cmake -DCMAKE_BUILD_TYPE=${{matrix.build-type}} -DBUILD_TESTING=ON -S $GITHUB_WORKSPACE
+      env:
+        CC:  gcc-10
+        CXX: g++-10
 
     - name: Build
       working-directory: ${{runner.workspace}}/build
