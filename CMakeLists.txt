@@ -26,7 +26,7 @@ ExternalProject_Add(bvh
     CMAKE_ARGS -Dproto_DIR=${proto_BINARY_DIR} -Dpar_DIR=${par_BINARY_DIR} -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
 ExternalProject_Get_Property(bvh BINARY_DIR)
 set(bvh_BINARY_DIR ${BINARY_DIR})
-ExternalProject_Add_StepDependencies(bvh configure proto)
+ExternalProject_Add_StepDependencies(bvh configure proto par)
 
 # Try to find a working multithreading framework
 set(MULTITHREADING_FRAMEWORK "None")
@@ -47,4 +47,4 @@ ExternalProject_Add(sol
         -Dbvh_DIR=${bvh_BINARY_DIR}
         -DSOL_MULTITHREADING_FRAMEWORK=${MULTITHREADING_FRAMEWORK}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE})
-ExternalProject_Add_StepDependencies(sol configure proto bvh)
+ExternalProject_Add_StepDependencies(sol configure proto par bvh)
