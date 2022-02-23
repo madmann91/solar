@@ -18,7 +18,7 @@ jobs:
 
     - name: Install GCC 11
       if: startsWith(matrix.os, 'ubuntu')
-      run: sudo apt-get install -y gcc-11 g++-11
+      run: sudo apt-get install -y gcc-11 g++-11 libstdc++-11
 
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2
@@ -32,10 +32,13 @@ jobs:
     - name: Configure CMake
       working-directory: ${{runner.workspace}}/build
       shell: bash # Necessary because of the $GITHUB_WORKSPACE variable
-      run: cmake -DCMAKE_BUILD_TYPE=${{matrix.build-type}} -DBUILD_TESTING=ON -S $GITHUB_WORKSPACE
-      env:
-        CC:  gcc-11
-        CXX: g++-11
+      run:
+        cmake
+          -DCMAKE_CXX_COMPILER=g++-11
+          -DCMAKE_C_COMPILER=gcc-11
+          -DCMAKE_BUILD_TYPE=${{matrix.build-type}}
+          -DBUILD_TESTING=ON
+          -S $GITHUB_WORKSPACE
 
     - name: Build
       working-directory: ${{runner.workspace}}/build
