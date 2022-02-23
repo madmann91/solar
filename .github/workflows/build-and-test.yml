@@ -16,9 +16,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install GCC 10
+    - name: Install GCC 11
       if: startsWith(matrix.os, 'ubuntu')
-      run: sudo apt-get install -y gcc-10 g++-10
+      run: sudo apt-get install -y gcc-11 g++-11
 
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2
