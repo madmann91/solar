@@ -11,6 +11,7 @@ ExternalProject_Add(proto
     CMAKE_ARGS
         -DBUILD_TESTING=OFF
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER})
 ExternalProject_Get_Property(proto BINARY_DIR)
 set(proto_BINARY_DIR ${BINARY_DIR})
@@ -21,6 +22,7 @@ ExternalProject_Add(par
     CMAKE_ARGS
         -DBUILD_TESTING=OFF
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER})
 ExternalProject_Get_Property(par BINARY_DIR)
 set(par_BINARY_DIR ${BINARY_DIR})
@@ -34,6 +36,7 @@ ExternalProject_Add(bvh
         -Dpar_DIR=${par_BINARY_DIR}
         -DBUILD_TESTING=OFF
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER})
 ExternalProject_Get_Property(bvh BINARY_DIR)
 set(bvh_BINARY_DIR ${BINARY_DIR})
@@ -59,5 +62,6 @@ ExternalProject_Add(sol
         -Dbvh_DIR=${bvh_BINARY_DIR}
         -DSOL_MULTITHREADING_FRAMEWORK=${MULTITHREADING_FRAMEWORK}
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER})
 ExternalProject_Add_StepDependencies(sol configure proto par bvh)
